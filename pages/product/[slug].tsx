@@ -18,7 +18,7 @@ export async function getStaticProps({
   preview,
 }: GetStaticPropsContext<{ slug: string }>) {
   const config = getConfig({ locale })
-  const { pages } = await getAllPages({ config, preview })
+  // const { pages } = await getAllPages({ config, preview })
   const { product } = await getProduct({
     variables: { slug: params!.slug },
     config,
@@ -31,7 +31,7 @@ export async function getStaticProps({
 
   return {
     props: {
-      pages,
+      // pages,
       product,
     },
     revalidate: 200,

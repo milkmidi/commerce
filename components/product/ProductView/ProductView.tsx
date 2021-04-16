@@ -1,3 +1,4 @@
+import React from 'react'
 import cn from 'classnames'
 import Image from 'next/image'
 import { NextSeo } from 'next-seo'
@@ -37,7 +38,7 @@ const ProductView: FC<Props> = ({ product }) => {
   // Select the correct variant based on choices
   const variant = getVariant(product, choices)
 
-  const addToCart = async () => {
+  const addToCart = React.useCallback(async () => {
     setLoading(true)
     try {
       await addItem({
@@ -49,7 +50,7 @@ const ProductView: FC<Props> = ({ product }) => {
     } catch (err) {
       setLoading(false)
     }
-  }
+  }, [product])
 
   return (
     <Container className="max-w-none w-full" clean>

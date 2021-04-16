@@ -128,3 +128,19 @@ a {
   }
 }
 
+.debug {
+  position: relative;
+  border: 2px solid red;
+}
+.debug[data-name]:before {
+  position: absolute;
+  content: attr(data-name);
+  left: 0;
+  /* right: 0; */
+  font-size: 14px;
+  background-color: rgba(255,0,0,0.5);
+  z-index: 100;
+  color: white;
+  display: inline-block;
+  pointer-events: none;
+}

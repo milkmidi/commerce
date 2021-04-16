@@ -6,6 +6,7 @@ import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
 import { getConfig } from '@framework/api'
 import getAllProducts from '@framework/product/get-all-products'
+import getProduct from '@framework/product/getProduct'
 import getSiteInfo from '@framework/common/get-site-info'
 import getAllPages from '@framework/common/get-all-pages'
 
@@ -16,20 +17,26 @@ export async function getStaticProps({
   const config = getConfig({ locale })
 
   const { products } = await getAllProducts({
-    variables: { first: 12 },
+    variables: {
+      first: 50,
+      entityIds: [324, 326], // HW0109, HW0110
+    },
     config,
     preview,
   })
 
-  const { categories, brands } = await getSiteInfo({ config, preview })
-  const { pages } = await getAllPages({ config, preview })
+  // const { categories, brands } = await getSiteInfo({ config, preview })
+  // const { pages } = await getAllPages({ config, preview })
+
+  /* const data = await getProduct({config})
+  console.log(data) */
 
   return {
     props: {
       products,
-      categories,
-      brands,
-      pages,
+      // categories,
+      // brands,
+      // pages,
     },
     revalidate: 14400,
   }
@@ -40,6 +47,8 @@ export default function Home({
   brands,
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  // console.log('products', products);
+  // console.log(brands, categories);
   return (
     <>
       <Grid>
@@ -54,7 +63,7 @@ export default function Home({
           />
         ))}
       </Grid>
-      <Marquee variant="secondary">
+      {/* <Marquee variant="secondary">
         {products.slice(0, 3).map((product, i) => (
           <ProductCard
             key={product.id}
@@ -66,8 +75,8 @@ export default function Home({
             }}
           />
         ))}
-      </Marquee>
-      <Hero
+      </Marquee> */}
+      {/* <Hero
         headline="Release Details: The Yeezy BOOST 350 V2 ‘Natural'"
         description="
         The Yeezy BOOST 350 V2 lineup continues to grow. We recently had the
@@ -76,8 +85,8 @@ export default function Home({
         shoe was originally called ‘Abez’, which translated to ‘Tin’ in
         Hebrew. It’s now undergone a name change, and will be referred to as
         ‘Natural’."
-      />
-      <Grid layout="B">
+      /> */}
+      {/* <Grid layout="B">
         {products.slice(0, 3).map((product, i) => (
           <ProductCard
             key={product.id}
@@ -88,8 +97,8 @@ export default function Home({
             }}
           />
         ))}
-      </Grid>
-      <Marquee>
+      </Grid> */}
+      {/* <Marquee>
         {products.slice(0, 3).map((product, i) => (
           <ProductCard
             key={product.id}
@@ -101,7 +110,7 @@ export default function Home({
             }}
           />
         ))}
-      </Marquee>
+      </Marquee> */}
       {/* <HomeAllProductsGrid
         newestProducts={products}
         categories={categories}

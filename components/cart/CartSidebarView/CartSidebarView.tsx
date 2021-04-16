@@ -33,7 +33,8 @@ const CartSidebarView: FC = () => {
 
   return (
     <div
-      className={cn(s.root, {
+      data-name="CartSlidebarView"
+      className={cn('debug', s.root, {
         [s.empty]: error || success || isLoading || isEmpty,
       })}
     >
